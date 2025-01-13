@@ -15,8 +15,8 @@ min_token_length = 30
 st.write("Initializing models")
 
 if not get_from_session(st, SESSION_VARS.LOADED_MODELS):
-    nlp = spacy.load("en_core_web_sm") #English()
-
+    # nlp = spacy.load("en_core_web_sm") #English()
+    nlp = spacy.load("sv_core_news_sm")
     # uncomment this command to print the file location of the Spacy model
     # st.write(nlp._path)
 
@@ -24,7 +24,7 @@ if not get_from_session(st, SESSION_VARS.LOADED_MODELS):
     nlp.add_pipe("sentencizer")
     put_to_session(st, SESSION_VARS.NLP, nlp)
 
-    embedding_model_cpu = SentenceTransformer(model_name_or_path="models/models--sentence-transformers--all-mpnet-base-v2/snapshots/84f2bcc00d77236f9e89c8a360a00fb1139bf47d",
+    embedding_model_cpu = SentenceTransformer(model_name_or_path="sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
                                           device="cpu") # choose the device to load the model to (note: GPU will often be *much* faster than CPU)
     put_to_session(st, SESSION_VARS.EMBEDDING_MODEL_CPU, embedding_model_cpu)
 
